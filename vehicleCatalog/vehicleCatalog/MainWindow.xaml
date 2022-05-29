@@ -1,0 +1,20 @@
+﻿<Window x:Class="vehicleCatalog.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:vehicleCatalog"
+        mc:Ignorable="d"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Label Content="Vehicles" HorizontalAlignment="Center" Margin="0,13,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" RenderTransformOrigin="0.535,0.579" FontSize="16" FontWeight="Bold" Foreground="Gray"/>
+        <DataGrid Name="Vehicles" Height="276" Margin="30,56,30,0" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" CanUserAddRows="True" CanUserDeleteRows="True"/>
+        <TextBox Name="SearchBox"  HorizontalAlignment="Left" Height="30" Margin="30,385,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="524"/>
+        <Button Content="Search" HorizontalAlignment="Left" Height="30" Margin="595,385,0,0" VerticalAlignment="Top" Width="143"/>
+        <Button Content="Generate Invitation" HorizontalAlignment="Left" Height="30" Margin="595,342,0,0" VerticalAlignment="Top" Width="143"/>
+        <Label Name ="Paging" Content="Label" Margin="242,343,0,61" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
+        <Button Content="Next Page" HorizontalAlignment="Left" Height="30" Margin="375,342,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button Content="Previous Page" HorizontalAlignment="Left" Height="30" Margin="121,342,0,0" VerticalAlignment="Top" Width="100"/>
+    </Grid>
+</Window>
