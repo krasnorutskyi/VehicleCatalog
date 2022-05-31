@@ -9,6 +9,7 @@ using VehicleCatalog.Application.Paging;
 using VehicleCatalog.Core.Entities;
 using VehicleCatalog.Infrastructure.DataInitializer;
 using VehicleCatalog.Infrastructure.EF;
+using VehicleCatalog.Infrastructure.Services;
 using Path = System.IO.Path;
 
 namespace vehicleCatalog
@@ -105,12 +106,11 @@ namespace vehicleCatalog
 
         }
 
-        private void Remove(object sender, RoutedEventArgs e)
+        private async void Remove(object sender, RoutedEventArgs e)
         {
             var vehicleId = Convert.ToInt32((sender as Button)?.Tag);
-            var vehicle = this._vehicles.FirstOrDefault(v => v.Id == vehicleId);
-            if (vehicle != null)
-                this._vehiclesService.DeleteAsync(vehicle);
+            var vehicle = await this._vehiclesService.GetAsync(vehicleId);
+            await this._vehiclesService.DeleteAsync(vehicle);
             RefreshGrid();
 
         }

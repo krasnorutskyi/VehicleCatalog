@@ -25,7 +25,7 @@ namespace VehicleCatalog.Infrastructure
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddScoped<IVehiclesService, VehicleService>();
+            services.AddScoped<IVehiclesService, VehiclesService>();
 
             return services;
         }

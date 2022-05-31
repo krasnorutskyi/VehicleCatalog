@@ -15,9 +15,9 @@ namespace VehicleCatalog.Application.IServices
 
         Task<PagedList<Vehicle>> GetVehiclesPageAsync(PageParameters pageParameters, string filter);
 
-        void AddAsync(Vehicle vehicle);
-        void UpdateAsync(Vehicle vehicle);
-        void DeleteAsync(Vehicle vehicle);
+        Task AddAsync(Vehicle vehicle);
+        Task UpdateAsync(Vehicle vehicle);
+        Task DeleteAsync(Vehicle vehicle);
 
         Task<Vehicle> GetAsync(int id);
 

@@ -10,21 +10,21 @@ using iTextSharp.text;
 
 namespace VehicleCatalog.Infrastructure.Services
 {
-    public class VehicleService : IVehiclesService
+    public class VehiclesService : IVehiclesService
     {
         private readonly IGenericRepository<Vehicle> _vehicleRepository;
 
-        public VehicleService(IGenericRepository<Vehicle> vehicleRepository)
+        public VehiclesService(IGenericRepository<Vehicle> vehicleRepository)
         {
            this._vehicleRepository = vehicleRepository;
         }
 
-        public async void AddAsync(Vehicle vehicle)
+        public async Task AddAsync(Vehicle vehicle)
         {
             await this._vehicleRepository.AddAsync(vehicle); 
         }
 
-        public async void DeleteAsync(Vehicle vehicle)
+        public async Task DeleteAsync(Vehicle vehicle)
         {
             await this._vehicleRepository.DeleteAsync(vehicle);
         }
@@ -74,7 +74,7 @@ namespace VehicleCatalog.Infrastructure.Services
             v.LastService.Equals(filter) || v.Model.StartsWith(filter) || v.RegistrationNumber.StartsWith(filter) || v.VehicleType.StartsWith(filter));
         }
 
-        public async void UpdateAsync(Vehicle vehicle)
+        public async Task UpdateAsync(Vehicle vehicle)
         {
             await this._vehicleRepository.UpdateAsync(vehicle);
         }
