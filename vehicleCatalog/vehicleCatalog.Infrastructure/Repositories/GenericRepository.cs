@@ -17,10 +17,10 @@ namespace VehicleCatalog.Infrastructure.Repositories
 
         private readonly ApplicationContext _db;
         private readonly DbSet<TEntity> _table;
-        public GenericRepository(ApplicationContext db, DbSet<TEntity> table)
+        public GenericRepository(ApplicationContext db)
         {
-            this._db = db;
-            this._table = table;
+            this._db = new ApplicationContext();
+            this._table = this._db.Set<TEntity>();
         }
 
         public async Task AddAsync(TEntity entity)

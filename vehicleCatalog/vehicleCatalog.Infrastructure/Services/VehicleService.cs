@@ -29,7 +29,7 @@ namespace VehicleCatalog.Infrastructure.Services
             await this._vehicleRepository.DeleteAsync(vehicle);
         }
 
-        public async void GenerateIvitationPdf(Vehicle vehicle, string path)
+        public void GenerateIvitationPdf(Vehicle vehicle, string path)
         {
             var invitation = new Document();
             var rnd = new Random();
@@ -71,7 +71,7 @@ namespace VehicleCatalog.Infrastructure.Services
         public async Task<PagedList<Vehicle>> GetVehiclesPageAsync(PageParameters pageParameters, string filter)
         {
             return await this._vehicleRepository.GetPageAsync(pageParameters, v =>v.OwnersName.StartsWith(filter) || v.VinCode.StartsWith(filter) || v.Color.StartsWith(filter) ||
-            v.LastService.Equals(filter) || v.Model.StartsWith(filter) || v.RegistrationNumber.StartsWith(filter));
+            v.LastService.Equals(filter) || v.Model.StartsWith(filter) || v.RegistrationNumber.StartsWith(filter) || v.VehicleType.StartsWith(filter));
         }
 
         public async void UpdateAsync(Vehicle vehicle)

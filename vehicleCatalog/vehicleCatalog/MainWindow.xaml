@@ -4,17 +4,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:vehicleCatalog"
-        mc:Ignorable="d"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-        Title="MainWindow" Height="450" Width="800">
+        mc:Ignorable="d"       
+        Title="MainWindow" Height="610" Width="900" ResizeMode="NoResize">
     <Grid>
-        <Label Content="Vehicles" HorizontalAlignment="Center" Margin="0,13,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" RenderTransformOrigin="0.535,0.579" FontSize="16" FontWeight="Bold" Foreground="Gray"/>
-        <DataGrid Name="Vehicles" Height="276" Margin="30,56,30,0" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" CanUserAddRows="True" CanUserDeleteRows="True"/>
-        <TextBox Name="SearchBox"  HorizontalAlignment="Left" Height="30" Margin="30,385,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="524"/>
-        <Button Content="Search" HorizontalAlignment="Left" Height="30" Margin="595,385,0,0" VerticalAlignment="Top" Width="143"/>
-        <Button Content="Generate Invitation" HorizontalAlignment="Left" Height="30" Margin="595,342,0,0" VerticalAlignment="Top" Width="143"/>
-        <Label Name ="Paging" Content="Label" Margin="242,343,0,61" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Center"/>
-        <Button Content="Next Page" HorizontalAlignment="Left" Height="30" Margin="375,342,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button Content="Previous Page" HorizontalAlignment="Left" Height="30" Margin="121,342,0,0" VerticalAlignment="Top" Width="100"/>
+        <DataGrid x:Name="vehicles" Margin="20,40,0,0" FontSize="16" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" IsReadOnly="True" Height="424" VerticalAlignment="Top" HorizontalAlignment="Left" Width="850">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Vehicle Type" Binding="{Binding VehicleType}"/>
+                <DataGridTextColumn Header="Model" Binding="{Binding Model}"/>
+                <DataGridTextColumn Header="Color" Binding="{Binding Color}"/>
+                <DataGridTextColumn Header="VIN-Code" Binding="{Binding VinCode}"/>
+                <DataGridTextColumn Header="Registration" Binding="{Binding RegistrationNumber}"/>
+                <DataGridTextColumn Header="Production Date" Binding="{Binding ProductionDate}"/>
+                <DataGridTextColumn Header="Last Service" Binding="{Binding LastService}"/>
+                <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Tag="{Binding Id}" Click="Remove">
+                                Remove
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Vehicles" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0" FontSize="18"/>
+        <TextBox x:Name="searchBox" HorizontalAlignment="Left" Margin="27,531,0,0" TextWrapping="Wrap" Width="300" FontWeight="Normal" FontSize="18" Height="30" VerticalAlignment="Top"/>
+        <Button Content="Search" HorizontalAlignment="Left" Margin="346,531,0,0" Width="80" FontSize="18" Height="30" VerticalAlignment="Top" Click="SearchButtonClick"/>
+        <Button Content="Previous" HorizontalAlignment="Left" Margin="306,476,0,0" VerticalAlignment="Top" Width="80" Height="30" FontSize="18" Click="PrevPageButtonClick"/>
+        <Button Content="Next" HorizontalAlignment="Left" Margin="510,476,0,0" VerticalAlignment="Top" Width="80" Height="30" FontSize="18" Click="NextPageButtonClick"/>
+        <Label x:Name="pagesInfo" Content="Label" HorizontalAlignment="Left" Margin="385,476,0,0" VerticalAlignment="Top" FontSize="18" Height="30" Width="120" BorderBrush="Black" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Button Content="Invite PDF" HorizontalAlignment="Left" Margin="770,531,0,0" Width="100" FontSize="18" Height="30" VerticalAlignment="Top" Click="GenerateInvitationPDF"/>
     </Grid>
 </Window>

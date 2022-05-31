@@ -18,7 +18,7 @@ namespace VehicleCatalog.Infrastructure.EF
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = @"server=(LocalDb)\MSSQLLocalDB;database=Vehicles;integrated security=True;
-                    MultipleActiveResultSets=True;App=EntityFramework;";
+                    MultipleActiveResultSets=True;App=EntityFramework";
             optionsBuilder.UseSqlServer(connectionString);
         }
 

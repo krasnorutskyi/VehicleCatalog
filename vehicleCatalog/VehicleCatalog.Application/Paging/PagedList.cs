@@ -22,7 +22,7 @@ namespace VehicleCatalog.Application.Paging
             this.PageIndex = pageParameters.PageIndex;
             this.PageSize = pageParameters.PageSize;
             this.TotalElements = totalElements;
-            this.TotalCount = (int)Math.Ceiling((double)totalElements/pageParameters.PageSize);
+            this.TotalCount = (int)Math.Ceiling((double)totalElements / pageParameters.PageSize);
 
             this.AddRange(elements);
         }
