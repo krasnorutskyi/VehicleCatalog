@@ -4,9 +4,14 @@ using VehicleCatalog.Application.IServices;
 using VehicleCatalog.Application.Paging;
 using VehicleCatalog.Core.Entities;
 using VehicleCatalog.Application.IRepositories;
+using System.Collections.Generic;
 using System.IO;
-using iTextSharp.text.pdf;
-using iTextSharp.text;
+using iText;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
+using iText.Kernel.Pdf.Canvas.Draw;
 
 namespace VehicleCatalog.Infrastructure.Services
 {
@@ -31,32 +36,36 @@ namespace VehicleCatalog.Infrastructure.Services
 
         public void GenerateIvitationPdf(Vehicle vehicle, string path)
         {
-            var invitation = new Document();
+            
             var rnd = new Random();
             var hours = rnd.Next(8, 18);
             var minutes = rnd.Next(0,60);
             var time = new TimeOnly(hours, minutes);
-            using (var writer = PdfWriter.GetInstance(invitation, new FileStream(path, FileMode.Create)))
-            {
-                invitation.Open();
 
-                var helvetica = new Font(Font.FontFamily.HELVETICA, 12);
-                var helveticaBase = helvetica.GetCalculatedBaseFont(false);
-                writer.DirectContent.BeginText();
-                writer.DirectContent.SetFontAndSize(helveticaBase, 12f);
-                writer.DirectContent.ShowTextAligned(Element.ALIGN_LEFT, $"Hello {vehicle.OwnersName}! \n You need to visit our service" +
-                    $" as your last visit was {vehicle.LastService} and as you need to hold it every year,\n we assign " +
-                    $"next date to check and service your vehicle: {vehicle.VehicleType}, {vehicle.Model}, {vehicle.Color}, Vin-Code: {vehicle.VinCode}.\n" +
-                    $"Our next meeting is assigned to {vehicle.LastService.AddYears(1).Date} at {time}." +
-                    $"We are looking forward to you!", 35, 766, 0);
-                writer.DirectContent.EndText();
+            PdfWriter writer = new PdfWriter(path);
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+            Paragraph header = new Paragraph("Invitation")
+               .SetTextAlignment(TextAlignment.CENTER)
+               .SetFontSize(20);
+            LineSeparator ls = new LineSeparator(new SolidLine());
+            Text text = new Text($"Hello {vehicle.OwnersName}! \n You need to visit our service" +
+                    $" as your last visit was {GetDate(vehicle.LastService)} and as you need to hold it every year, we assign " +
+                    $"next date to check and service your {vehicle.VehicleType.ToLower()}: {vehicle.Color} {vehicle.Model}, Vin-Code: {vehicle.VinCode}. " +
+                    $"Our next meeting is assigned to {GetDate(vehicle.LastService.AddYears(1))} at {time}." +
+                    $"We are looking forward to you!");
+            Paragraph main = new Paragraph(text)
+                .SetTextAlignment(TextAlignment.LEFT)
+                .SetFontSize(16);
 
-                invitation.Close();
-                writer.Close();
+            document.Add(ls);
+            document.Add(header);
+            document.Add(ls);
+            document.Add(main);
+            document.Close();
 
-            }
-            
         }
+        
 
         public async Task<Vehicle> GetAsync(int id)
         {
@@ -77,6 +86,17 @@ namespace VehicleCatalog.Infrastructure.Services
         public async Task UpdateAsync(Vehicle vehicle)
         {
             await this._vehicleRepository.UpdateAsync(vehicle);
+        }
+
+        public async Task UpdateRangeAsync(IEnumerable<Vehicle> vehicles)
+        {
+            await this._vehicleRepository.UpdateRangeAsync(vehicles);
+        }
+
+        private string GetDate(DateTime dateTime)
+        {
+            string[] date = dateTime.ToString().Split(" ");
+            return date[0]; 
         }
     }
 }

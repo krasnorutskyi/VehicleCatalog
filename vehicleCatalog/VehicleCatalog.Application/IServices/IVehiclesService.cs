@@ -18,6 +18,7 @@ namespace VehicleCatalog.Application.IServices
         Task AddAsync(Vehicle vehicle);
         Task UpdateAsync(Vehicle vehicle);
         Task DeleteAsync(Vehicle vehicle);
+        Task UpdateRangeAsync(IEnumerable<Vehicle> vehicles);
 
         Task<Vehicle> GetAsync(int id);
 

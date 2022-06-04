@@ -5,19 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:vehicleCatalog"
         mc:Ignorable="d"       
-        Title="MainWindow" Height="610" Width="900" ResizeMode="NoResize">
+        Title="MainWindow" Height="610" Width="1000" ResizeMode="NoResize">
     <Grid>
-        <DataGrid x:Name="vehicles" Margin="20,40,0,0" FontSize="16" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" IsReadOnly="True" Height="424" VerticalAlignment="Top" HorizontalAlignment="Left" Width="850">
+        <DataGrid x:Name="vehicles" Margin="20, 40, 20, 0" FontSize="16" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled"  CanUserAddRows="True" Height="424" VerticalAlignment="Top" HorizontalAlignment="Left" Width="950">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="Vehicle Type" Binding="{Binding VehicleType}"/>
-                <DataGridTextColumn Header="Model" Binding="{Binding Model}"/>
-                <DataGridTextColumn Header="Color" Binding="{Binding Color}"/>
-                <DataGridTextColumn Header="VIN-Code" Binding="{Binding VinCode}"/>
-                <DataGridTextColumn Header="Registration" Binding="{Binding RegistrationNumber}"/>
-                <DataGridTextColumn Header="Production Date" Binding="{Binding ProductionDate}"/>
-                <DataGridTextColumn Header="Last Service" Binding="{Binding LastService}"/>
-                <DataGridTemplateColumn Header="">
+                <DataGridTextColumn Header="Vehicle Type" Binding="{Binding VehicleType}" />
+                <DataGridTextColumn Header="Model" Binding="{Binding Model}" />
+                <DataGridTextColumn Header="Color" Binding="{Binding Color}" />
+                <DataGridTextColumn Header="VIN-Code" Binding="{Binding VinCode}" />
+                <DataGridTextColumn Header="Registration" Binding="{Binding RegistrationNumber}" />
+                <DataGridTextColumn Header="Owners Name" Binding="{Binding OwnersName}"/>
+                <DataGridTextColumn Header="Production Date" Binding="{Binding ProductionDate}" />
+                <DataGridTextColumn Header="Last Service" Binding="{Binding LastService}" />
+                <DataGridTemplateColumn Header="" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Tag="{Binding Id}" Click="Remove">
@@ -35,5 +35,6 @@
         <Button Content="Next" HorizontalAlignment="Left" Margin="510,476,0,0" VerticalAlignment="Top" Width="80" Height="30" FontSize="18" Click="NextPageButtonClick"/>
         <Label x:Name="pagesInfo" Content="Label" HorizontalAlignment="Left" Margin="385,476,0,0" VerticalAlignment="Top" FontSize="18" Height="30" Width="120" BorderBrush="Black" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Button Content="Invite PDF" HorizontalAlignment="Left" Margin="770,531,0,0" Width="100" FontSize="18" Height="30" VerticalAlignment="Top" Click="GenerateInvitationPDF"/>
+        <Button Content="Save Changes" Margin="541,531,239,0" VerticalAlignment="Top" FontSize="18" Height="30" Click="SaveChangesClick"/>
     </Grid>
 </Window>

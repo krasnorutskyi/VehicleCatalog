@@ -70,5 +70,11 @@ namespace VehicleCatalog.Infrastructure.Repositories
             this._table.Update(entity);
             await this._db.SaveChangesAsync();
         }
+
+        public async Task UpdateRangeAsync(IEnumerable<TEntity> entities)
+        {
+            this._table.UpdateRange(entities);
+            await this._db.SaveChangesAsync();
+        }
     }
 }

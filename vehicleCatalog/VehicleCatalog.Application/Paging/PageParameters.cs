@@ -8,7 +8,7 @@ namespace VehicleCatalog.Application.Paging
 {
     public class PageParameters
     {
-        public int PageSize { get; set; } = 14;
+        public int PageSize { get; set; } = 12;
         public int PageIndex { get; set; } = 1;
     }
 }

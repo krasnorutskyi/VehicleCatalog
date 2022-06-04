@@ -14,6 +14,7 @@ namespace VehicleCatalog.Application.IRepositories
         Task AddAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);
         Task DeleteAsync(TEntity entity);
+        Task UpdateRangeAsync(IEnumerable<TEntity> entities);
         Task<TEntity> GetOneAsync(int id);
         Task<PagedList<TEntity>> GetPageAsync(PageParameters pageParameters);
         Task<PagedList<TEntity>> GetPageAsync(PageParameters pageParameters, Expression<Func<TEntity, bool>> predicate);

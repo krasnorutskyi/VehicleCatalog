@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +8,6 @@ using VehicleCatalog.Application.Paging;
 using VehicleCatalog.Core.Entities;
 using VehicleCatalog.Infrastructure.DataInitializer;
 using VehicleCatalog.Infrastructure.EF;
-using VehicleCatalog.Infrastructure.Services;
 using Path = System.IO.Path;
 
 namespace vehicleCatalog
@@ -27,8 +25,8 @@ namespace vehicleCatalog
         {
             this._vehiclesService = vehiclesService;
 
-            var context = new ApplicationContext();
-            DbInitializer.Initialize(context);
+            //var context = new ApplicationContext();
+            //DbInitializer.Initialize(context);
             InitializeComponent();
             new Action(async () => await this.SetPage(1))();
         }
@@ -47,6 +45,27 @@ namespace vehicleCatalog
             this._vehicles = await this._vehiclesService.GetVehiclesPageAsync(_pageParameters, searchBox.Text);
             this.vehicles.ItemsSource = this._vehicles;
             this.pagesInfo.Content = $"{this._vehicles.PageIndex} of {this._vehicles.TotalCount}";
+        }
+
+        private async void SaveChangesClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var selectedVehicle = (Vehicle?)this.vehicles.SelectedItem;
+                if (string.IsNullOrEmpty(selectedVehicle.VehicleType) || string.IsNullOrEmpty(selectedVehicle.OwnersName)
+                    || string.IsNullOrEmpty(selectedVehicle.ProductionDate.ToString()) || string.IsNullOrEmpty(selectedVehicle.RegistrationNumber)
+                    || string.IsNullOrEmpty(selectedVehicle.VinCode) || string.IsNullOrEmpty(selectedVehicle.Color) || string.IsNullOrEmpty(selectedVehicle.Model)
+                    || string.IsNullOrEmpty(selectedVehicle.LastService.ToString()))
+                {
+                    throw new Exception();
+                }                
+               await this._vehiclesService.UpdateRangeAsync(_vehicles);
+                
+            }
+            catch
+            {
+                MessageBox.Show("Fill all cells with information!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private async void SearchButtonClick(object sender, RoutedEventArgs e)
@@ -110,15 +129,11 @@ namespace vehicleCatalog
         {
             var vehicleId = Convert.ToInt32((sender as Button)?.Tag);
             var vehicle = await this._vehiclesService.GetAsync(vehicleId);
-            await this._vehiclesService.DeleteAsync(vehicle);
-            RefreshGrid();
-
-        }
-
-
-        private void RefreshGrid()
-        {
-            this.vehicles.Items.Refresh();
+            if (vehicle != null)
+            {
+                await this._vehiclesService.DeleteAsync(vehicle);
+            }
+            await this.SetPage(this._vehicles.PageIndex);
         }
     }
 }
