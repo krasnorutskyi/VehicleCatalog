@@ -60,7 +60,7 @@ namespace VehicleCatalog.Infrastructure.Repositories
                                      .Skip((pageParameters.PageIndex - 1) * pageParameters.PageSize)
                                      .Take(pageParameters.PageSize)
                                      .ToListAsync();
-            var totalElements = await this._table.CountAsync();
+            var totalElements = await this._table.CountAsync(predicate);
 
             return new PagedList<TEntity>(elements, pageParameters, totalElements);
         }

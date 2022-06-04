@@ -45,20 +45,24 @@ namespace vehicleCatalog
             this._vehicles = await this._vehiclesService.GetVehiclesPageAsync(_pageParameters, searchBox.Text);
             this.vehicles.ItemsSource = this._vehicles;
             this.pagesInfo.Content = $"{this._vehicles.PageIndex} of {this._vehicles.TotalCount}";
+            
         }
 
         private async void SaveChangesClick(object sender, RoutedEventArgs e)
         {
             try
             {
-                var selectedVehicle = (Vehicle?)this.vehicles.SelectedItem;
-                if (string.IsNullOrEmpty(selectedVehicle.VehicleType) || string.IsNullOrEmpty(selectedVehicle.OwnersName)
-                    || string.IsNullOrEmpty(selectedVehicle.ProductionDate.ToString()) || string.IsNullOrEmpty(selectedVehicle.RegistrationNumber)
-                    || string.IsNullOrEmpty(selectedVehicle.VinCode) || string.IsNullOrEmpty(selectedVehicle.Color) || string.IsNullOrEmpty(selectedVehicle.Model)
-                    || string.IsNullOrEmpty(selectedVehicle.LastService.ToString()))
-                {
-                    throw new Exception();
-                }                
+               foreach(var vehicle in this._vehicles)
+               {
+                    if(String.IsNullOrEmpty(vehicle.VinCode)|| String.IsNullOrEmpty(vehicle.OwnersName)
+                        || String.IsNullOrEmpty(vehicle.RegistrationNumber) || String.IsNullOrEmpty(vehicle.Color)
+                        || String.IsNullOrEmpty(vehicle.Model) || String.IsNullOrEmpty(vehicle.VehicleType)
+                        || String.IsNullOrEmpty(vehicle.LastService.ToString()) || String.IsNullOrEmpty(vehicle.ProductionDate.ToString()))
+                    {
+                        throw new Exception();
+                    }
+               }
+                
                await this._vehiclesService.UpdateRangeAsync(_vehicles);
                 
             }
@@ -73,6 +77,10 @@ namespace vehicleCatalog
             if (searchBox.Text != string.Empty)
             {
                 await this.Search(1);
+            }
+            else
+            {
+                await this.SetPage(1);
             }
         }
 

@@ -31,10 +31,10 @@
         <Label Content="Vehicles" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0" FontSize="18"/>
         <TextBox x:Name="searchBox" HorizontalAlignment="Left" Margin="27,531,0,0" TextWrapping="Wrap" Width="300" FontWeight="Normal" FontSize="18" Height="30" VerticalAlignment="Top"/>
         <Button Content="Search" HorizontalAlignment="Left" Margin="346,531,0,0" Width="80" FontSize="18" Height="30" VerticalAlignment="Top" Click="SearchButtonClick"/>
-        <Button Content="Previous" HorizontalAlignment="Left" Margin="306,476,0,0" VerticalAlignment="Top" Width="80" Height="30" FontSize="18" Click="PrevPageButtonClick"/>
-        <Button Content="Next" HorizontalAlignment="Left" Margin="510,476,0,0" VerticalAlignment="Top" Width="80" Height="30" FontSize="18" Click="NextPageButtonClick"/>
-        <Label x:Name="pagesInfo" Content="Label" HorizontalAlignment="Left" Margin="385,476,0,0" VerticalAlignment="Top" FontSize="18" Height="30" Width="120" BorderBrush="Black" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-        <Button Content="Invite PDF" HorizontalAlignment="Left" Margin="770,531,0,0" Width="100" FontSize="18" Height="30" VerticalAlignment="Top" Click="GenerateInvitationPDF"/>
-        <Button Content="Save Changes" Margin="541,531,239,0" VerticalAlignment="Top" FontSize="18" Height="30" Click="SaveChangesClick"/>
+        <Button Content="Previous" HorizontalAlignment="Left" Margin="372,476,0,0" VerticalAlignment="Top" Width="80" Height="30" FontSize="18" Click="PrevPageButtonClick"/>
+        <Button Content="Next" HorizontalAlignment="Left" Margin="576,476,0,0" VerticalAlignment="Top" Width="80" Height="30" FontSize="18" Click="NextPageButtonClick"/>
+        <Label x:Name="pagesInfo" Content="Label" HorizontalAlignment="Left" Margin="452,476,0,0" VerticalAlignment="Top" FontSize="18" Height="30" Width="120" BorderBrush="Black" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Button Content="Invite PDF" HorizontalAlignment="Left" Margin="864,531,0,0" Width="100" FontSize="18" Height="30" VerticalAlignment="Top" Click="GenerateInvitationPDF"/>
+        <Button Content="Save Changes" Margin="533,531,247,0" VerticalAlignment="Top" FontSize="18" Height="30" Click="SaveChangesClick"/>
     </Grid>
 </Window>
