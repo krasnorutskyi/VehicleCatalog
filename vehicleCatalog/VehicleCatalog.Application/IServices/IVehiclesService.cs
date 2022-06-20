@@ -13,7 +13,8 @@ namespace VehicleCatalog.Application.IServices
     {
         Task<PagedList<Vehicle>> GetVehiclesPageAsync(PageParameters pageParameters);
 
-        Task<PagedList<Vehicle>> GetVehiclesPageAsync(PageParameters pageParameters, string filter);
+        Task<PagedList<Vehicle>> GetVehiclesPageAsync(PageParameters pageParameters, string vehicleType, string model, string color,
+            string vinCode, string regNumber, string ownersName, string prodYear, string lastService);
 
         Task AddAsync(Vehicle vehicle);
         Task UpdateAsync(Vehicle vehicle);
@@ -22,7 +23,8 @@ namespace VehicleCatalog.Application.IServices
 
         Task<Vehicle> GetAsync(int id);
 
-        void GenerateIvitationPdf(Vehicle vehicle, string path);
+        void GenerateIvitationPdf(List<Vehicle> vehicles, string path);
 
+        void SaveSearchResults(List<Vehicle> vehicles, string path);
     }
 }
